@@ -1,24 +1,8 @@
 import appDirs from 'appdirsjs';
 import fs from 'fs';
 import path from 'path';
-import * as readline from 'readline';
 
-const readKeyAsync = (): Promise<string> => {
-  return new Promise((resolve) => {
-    const readlineInterface = readline.createInterface({
-      input: process.stdin,
-      output: process.stdout,
-    });
-
-    readlineInterface.question(
-      'Please enter your OpenAI API key. You can find it here: https://platform.openai.com/account/api-keys. ',
-      (key) => {
-        readlineInterface.close();
-        resolve(key);
-      },
-    );
-  });
-};
+import { readStdinAsync } from './utils';
 
 export const ensureKeyAsync = async () => {
   if (process.env.OPENAI_API_KEY) {
@@ -37,7 +21,9 @@ export const ensureKeyAsync = async () => {
   }
 
   // otherwise, read from stdin
-  process.env.OPENAI_API_KEY = await readKeyAsync();
+  process.env.OPENAI_API_KEY = await readStdinAsync(
+    'Get your OpenAI API key from https://platform.openai.com/account/api-keys and enter your OpenAI API key here: ',
+  );
   if (!process.env.OPENAI_API_KEY) {
     console.error('You must provide a valid OpenAI API key in order to use aicmd.');
     process.exit(1);
