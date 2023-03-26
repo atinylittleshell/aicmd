@@ -14,11 +14,9 @@ jobs:
       matrix:
         os:
           - ubuntu
-          - macos
           - windows
         node-version:
           - "16.x"
-          - "18.x"
           - "19.x"
 
     name: build
