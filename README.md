@@ -1,4 +1,5 @@
 # aicmd
+[![build](https://github.com/kunchenguid/aicmd/actions/workflows/build.yml/badge.svg)](https://github.com/kunchenguid/aicmd/actions/workflows/build.yml)
 aicmd uses AI to help find the right command for your task.
 
 ## Usage
