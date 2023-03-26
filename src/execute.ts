@@ -21,12 +21,13 @@ const PlatformOSMapping: Record<string, string> = {
   win32: 'Windows',
 };
 
-const commandExtractor = /```\w*\s*(\S[^`]*\S)\s*```/g;
+const longCommandExtractor = /```\w*\s*(\S[^`]*\S)\s*```/g;
+const shortCommandExtractor = /(?<!`)`([^`]+)`(?!`)/g;
 
 export const executeAsync = async (prompt: string) => {
   const osPlatform = os.platform();
   if (!PlatformOSMapping[osPlatform]) {
-    console.error(chalk.red(`aicmd does not support your OS: ${osPlatform}`));
+    console.log(chalk.red(`aicmd does not support your OS: ${osPlatform}`));
     return;
   }
   const osName = PlatformOSMapping[osPlatform];
@@ -44,7 +45,7 @@ export const executeAsync = async (prompt: string) => {
         },
         { role: 'user', content: `Write a shell command that can complete the following task on ${osName}: ${prompt}` },
       ],
-      temperature: 0.5,
+      temperature: 0.2,
     },
     {
       headers: {
@@ -57,7 +58,11 @@ export const executeAsync = async (prompt: string) => {
   if (response.status === 200) {
     const chatResponse = response.data as ChatResponse;
     const chatResponseContent = chatResponse.choices[0].message.content;
-    const commandMatch = commandExtractor.exec(chatResponseContent);
+    let commandMatch = longCommandExtractor.exec(chatResponseContent);
+    if (!commandMatch) {
+      commandMatch = shortCommandExtractor.exec(chatResponseContent);
+    }
+
     if (commandMatch) {
       const command = commandMatch[1];
       console.log(chalk.green(command));
@@ -65,8 +70,10 @@ export const executeAsync = async (prompt: string) => {
       if (answer === 'y') {
         spawnSync(command, { shell: true, stdio: 'inherit' });
       }
+    } else {
+      console.log(chalk.red(chatResponseContent));
     }
   } else {
-    console.error(chalk.red('No confident solution found.'));
+    console.log(chalk.red('No confident solution found.'));
   }
 };

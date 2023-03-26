@@ -1,7 +1,7 @@
 {
   "name": "aicmd",
   "version": "1.0.0",
-  "description": "aicmd uses AI to help you find the right command for your task.",
+  "description": "aicmd uses AI to help find the right command for your task.",
   "main": "dist/src/index.js",
   "files": [
     "dist/**/*"
@@ -12,7 +12,6 @@
   "scripts": {
     "local": "npm run build && npm i -g .",
     "build": "tsc",
-    "test": "echo pass",
     "lint": "eslint --ext .ts src",
     "prepare": "npm run build"
   },
@@ -27,6 +26,10 @@
     "chatgpt",
     "terminal"
   ],
+  "engineStrict": true,
+  "engines": {
+    "node": ">=16.0.0"
+  },
   "author": "Kun Chen",
   "license": "MIT",
   "bugs": {
