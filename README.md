@@ -2,6 +2,7 @@
 [![build](https://github.com/kunchenguid/aicmd/actions/workflows/build.yml/badge.svg)](https://github.com/kunchenguid/aicmd/actions/workflows/build.yml)
 
 A CLI program that uses AI to help find the right command for your task.
+![screenshot](./doc/screenshot.png)
 
 ## Usage
 
