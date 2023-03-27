@@ -1,8 +1,11 @@
-# aicmd
+# AICMD
 [![build](https://github.com/kunchenguid/aicmd/actions/workflows/build.yml/badge.svg)](https://github.com/kunchenguid/aicmd/actions/workflows/build.yml)
 
-A CLI program that uses AI to help find the right command for your task.
+A CLI program that allows you to run shell commands using nautral language.
 ![screenshot](./doc/screenshot.png)
+
+## Prerequisites
+AICMD is based on Node.js. [Install Node.js](https://nodejs.org/en) before proceeding. Minimum required version is Node.js 16.
 
 ## Usage
 

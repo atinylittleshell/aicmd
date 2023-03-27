@@ -35,8 +35,8 @@ export const executeAsync = async (prompt: string, debug: boolean) => {
   const shellInfo = await getCurrentShellAsync();
 
   if (debug) {
-    console.log(chalk.blue(`OS: ${osName}`));
-    console.log(chalk.blue(`Shell: ${JSON.stringify(shellInfo)}`));
+    console.log(chalk.yellow(`OS: ${osName}`));
+    console.log(chalk.yellow(`Shell: ${JSON.stringify(shellInfo)}`));
   }
 
   const requestPayload = {
@@ -58,8 +58,8 @@ export const executeAsync = async (prompt: string, debug: boolean) => {
     temperature: 0.2,
   };
   if (debug) {
-    console.log('ChatGPT request:');
-    console.log(chalk.blue(JSON.stringify(requestPayload, null, 2)));
+    console.log(chalk.yellow('ChatGPT request:'));
+    console.log(chalk.yellow(JSON.stringify(requestPayload, null, 2)));
   }
 
   const response = await axios.post('https://api.openai.com/v1/chat/completions', requestPayload, {
@@ -72,8 +72,8 @@ export const executeAsync = async (prompt: string, debug: boolean) => {
   if (response.status === 200) {
     const chatResponse = response.data as ChatResponse;
     if (debug) {
-      console.log('ChatGPT response:');
-      console.log(chalk.blue(JSON.stringify(chatResponse, null, 2)));
+      console.log(chalk.yellow('ChatGPT response:'));
+      console.log(chalk.yellow(JSON.stringify(chatResponse, null, 2)));
     }
 
     const chatResponseContent = chatResponse.choices[0].message.content;

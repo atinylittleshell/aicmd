@@ -20,31 +20,36 @@ const processNameMatcher = /^(\S+)\s+(\S+)$/;
 
 export const getProcessNameAsync = (pid: string): Promise<string | null> => {
   return new Promise((resolve) => {
-    exec('cmd /c WMIC path win32_process get Name,Processid', (err, stdout) => {
-      if (err) {
+    if (os.platform() === 'win32') {
+      exec('cmd.exe /c WMIC path win32_process get Name,Processid', (err, stdout) => {
+        if (err) {
+          resolve(null);
+          return;
+        }
+
+        const lines = stdout.split('\n');
+        const processInfo = lines
+          .map((line) => line.trim().toLowerCase())
+          .map((line) => {
+            const match = processNameMatcher.exec(line);
+            if (match) {
+              const [name, id] = match.slice(1);
+              return { name, id };
+            }
+            return null;
+          })
+          .filter((item) => item && item.id === pid);
+        if (processInfo.length >= 1) {
+          resolve(processInfo[0]?.name || '');
+          return;
+        }
+
         resolve(null);
-        return;
-      }
-
-      const lines = stdout.split('\n');
-      const processInfo = lines
-        .map((line) => line.trim().toLowerCase())
-        .map((line) => {
-          const match = processNameMatcher.exec(line);
-          if (match) {
-            const [name, id] = match.slice(1);
-            return { name, id };
-          }
-          return null;
-        })
-        .filter((item) => item && item.id === pid);
-      if (processInfo.length >= 1) {
-        resolve(processInfo[0]?.name || '');
-        return;
-      }
-
+      });
+    } else {
+      // TODO: Implement for other OS
       resolve(null);
-    });
+    }
   });
 };
 
