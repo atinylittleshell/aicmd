@@ -1,6 +1,6 @@
 {
   "name": "aicmd",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "A CLI program that uses AI to help find the right command for your task.",
   "main": "dist/src/index.js",
   "files": [
