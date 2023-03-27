@@ -4,7 +4,7 @@ import chalk from 'chalk';
 import { spawnSync } from 'child_process';
 import os from 'os';
 
-import { readStdinAsync } from './utils';
+import { getCurrentShellAsync, readStdinAsync } from './utils';
 
 type ChatResponse = {
   choices: {
@@ -24,39 +24,58 @@ const PlatformOSMapping: Record<string, string> = {
 const longCommandExtractor = /```\w*\s*(\S[^`]*\S)\s*```/g;
 const shortCommandExtractor = /(?<!`)`([^`]+)`(?!`)/g;
 
-export const executeAsync = async (prompt: string) => {
+export const executeAsync = async (prompt: string, debug: boolean) => {
   const osPlatform = os.platform();
   if (!PlatformOSMapping[osPlatform]) {
     console.log(chalk.red(`aicmd does not support your OS: ${osPlatform}`));
     return;
   }
-  const osName = PlatformOSMapping[osPlatform];
 
-  const response = await axios.post(
-    'https://api.openai.com/v1/chat/completions',
-    {
-      model: 'gpt-3.5-turbo',
-      messages: [
-        {
-          role: 'system',
-          content:
-            'You can only respond with a single-line shell command in a single code block. ' +
-            'Do not write anything outside of the code block.',
-        },
-        { role: 'user', content: `Write a shell command that can complete the following task on ${osName}: ${prompt}` },
-      ],
-      temperature: 0.2,
-    },
-    {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+  const osName = PlatformOSMapping[osPlatform];
+  const shellInfo = await getCurrentShellAsync();
+
+  if (debug) {
+    console.log(chalk.blue(`OS: ${osName}`));
+    console.log(chalk.blue(`Shell: ${JSON.stringify(shellInfo)}`));
+  }
+
+  const requestPayload = {
+    model: 'gpt-3.5-turbo',
+    messages: [
+      {
+        role: 'system',
+        content:
+          'You can only respond with a single-line shell command in a single code block. ' +
+          'Do not write anything outside of the code block.',
       },
+      {
+        role: 'user',
+        content: `Write a ${
+          shellInfo ? shellInfo.displayName : 'shell'
+        } command that can complete the following task on ${osName}: ${prompt}`,
+      },
+    ],
+    temperature: 0.2,
+  };
+  if (debug) {
+    console.log('ChatGPT request:');
+    console.log(chalk.blue(JSON.stringify(requestPayload, null, 2)));
+  }
+
+  const response = await axios.post('https://api.openai.com/v1/chat/completions', requestPayload, {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
     },
-  );
+  });
 
   if (response.status === 200) {
     const chatResponse = response.data as ChatResponse;
+    if (debug) {
+      console.log('ChatGPT response:');
+      console.log(chalk.blue(JSON.stringify(chatResponse, null, 2)));
+    }
+
     const chatResponseContent = chatResponse.choices[0].message.content;
     let commandMatch = longCommandExtractor.exec(chatResponseContent);
     if (!commandMatch) {
@@ -66,9 +85,9 @@ export const executeAsync = async (prompt: string) => {
     if (commandMatch) {
       const command = commandMatch[1];
       console.log(chalk.green(command));
-      const answer = await readStdinAsync('Execute the command above? [y/N]');
+      const answer = await readStdinAsync('Execute the command above? [y/N] ');
       if (answer === 'y') {
-        spawnSync(command, { shell: true, stdio: 'inherit' });
+        spawnSync(command, { shell: shellInfo ? shellInfo.shell : true, stdio: 'inherit' });
       }
     } else {
       console.log(chalk.red(chatResponseContent));

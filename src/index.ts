@@ -10,10 +10,13 @@ const program = new Command();
 
 program
   .version(packageJson.version)
+  .option('-d --debug', 'output extra debugging information', false)
   .argument('<prompts...>', 'Ask what you want')
-  .action(async (prompts: string[]) => {
+  .action(async (prompts: string[], options: Record<string, string | boolean>) => {
     await ensureKeyAsync();
-    await executeAsync(prompts.join(' '));
+
+    const debug = options.debug ? true : false;
+    await executeAsync(prompts.join(' '), debug);
   });
 
 program.parse(process.argv);
