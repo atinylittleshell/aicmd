@@ -1,6 +1,6 @@
 {
   "name": "aicmd",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "A CLI program that allows you to run shell commands using nautral language.",
   "main": "dist/src/index.js",
   "files": [

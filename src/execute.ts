@@ -77,9 +77,15 @@ export const executeAsync = async (prompt: string, debug: boolean) => {
     }
 
     const chatResponseContent = chatResponse.choices[0].message.content;
-    let commandMatch = longCommandExtractor.exec(chatResponseContent);
+    // ChatGPT can return a multi-line code block, a single-line code block, or no code block at all.
+    // The following logic deals with these different cases.
+    let commandMatch: string[] | null = longCommandExtractor.exec(chatResponseContent);
     if (!commandMatch) {
       commandMatch = shortCommandExtractor.exec(chatResponseContent);
+    }
+    if (!commandMatch && !chatResponseContent.includes('`')) {
+      // if the response doesn't even contain a code block at all, assume the whole response is a command
+      commandMatch = ['', chatResponseContent];
     }
 
     if (commandMatch) {
