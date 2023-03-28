@@ -1,23 +1,16 @@
 {
-  "name": "aicmd",
-  "version": "1.1.2",
+  "name": "aicmd-monorepo",
+  "version": "1.0.0",
   "description": "A CLI program that allows you to run shell commands using nautral language.",
-  "main": "dist/src/index.js",
-  "files": [
-    "dist/**/*"
-  ],
-  "bin": {
-    "aicmd": "./dist/src/index.js"
-  },
-  "scripts": {
-    "local": "npm run build && npm i -g .",
-    "build": "tsc",
-    "lint": "eslint --ext .ts src",
-    "prepare": "npm run build"
-  },
+  "homepage": "https://aicmd.app",
+  "author": "Kun Chen",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kunchenguid/aicmd.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kunchenguid/aicmd/issues"
   },
   "keywords": [
     "ai",
@@ -30,30 +23,21 @@
   "engines": {
     "node": ">=16.0.0"
   },
-  "author": "Kun Chen",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/kunchenguid/aicmd/issues"
-  },
-  "homepage": "https://github.com/kunchenguid/aicmd#readme",
-  "devDependencies": {
-    "@types/node": "18.11.18",
-    "@typescript-eslint/eslint-plugin": "^5.16.0",
-    "@typescript-eslint/parser": "^5.16.0",
-    "eslint": "8.30.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-import-resolver-node": "^0.3.6",
-    "eslint-plugin-import": "^2.25.4",
-    "eslint-plugin-prettier": "^4.0.0",
-    "eslint-plugin-simple-import-sort": "^7.0.0",
-    "prettier": "^2.8.4",
-    "typescript": "^5.0.2"
-  },
-  "dependencies": {
-    "appdirsjs": "^1.2.7",
-    "axios": "^1.3.4",
-    "chalk": "^4.1.2",
-    "commander": "^10.0.0"
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "add:web": "npm install -w aicmd-web",
+    "dev:web": "npm run dev:web --workspaces --if-present",
+    "build:web": "npm run build:web --workspaces --if-present",
+    "start:web": "npm run start:web --workspaces --if-present",
+    "add:cli": "npm install -w aicmd",
+    "dev:cli": "npm run dev:cli --workspaces --if-present",
+    "build:cli": "npm run build:cli --workspaces --if-present",
+    "build": "npm run build --workspaces --if-present",
+    "lint": "npm run lint --workspaces --if-present",
+    "lint:fix": "npm run lint:fix --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present"
   },
   "prettier": {
     "semi": true,
