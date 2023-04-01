@@ -10,9 +10,6 @@ type OpenAIChatResponse = {
   }[];
 };
 
-const longCommandExtractor = /```\w*\s*(\S[^`]*\S)\s*```/g;
-const shortCommandExtractor = /(?<!`)`([^`]+)`(?!`)/g;
-
 export const getCommandAsync = async (prompt: string, context: CommandContext): Promise<GetCommandResponse> => {
   const requestPayload = {
     model: 'gpt-3.5-turbo',
@@ -43,6 +40,9 @@ export const getCommandAsync = async (prompt: string, context: CommandContext): 
   });
 
   if (response.ok) {
+    const longCommandExtractor = /```\w*\s*(\S[^`]*\S)\s*```/g;
+    const shortCommandExtractor = /(?<!`)`([^`]+)`(?!`)/g;
+
     const chatResponse = (await response.json()) as OpenAIChatResponse;
 
     const chatResponseContent = chatResponse.choices[0].message.content;

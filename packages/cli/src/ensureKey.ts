@@ -1,6 +1,5 @@
 import appDirs from 'appdirsjs';
 import fs from 'fs';
-import open from 'open';
 import path from 'path';
 
 import { readStdinAsync } from './utils';
@@ -22,7 +21,6 @@ export const ensureKeyAsync = async () => {
   }
 
   // otherwise, read from stdin
-  open('https://aicmd.app/get_key');
   process.env.AICMD_ACCESS_TOKEN = await readStdinAsync(
     'Get your access token from https://aicmd.app/get_key and enter it here: ',
   );

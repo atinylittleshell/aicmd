@@ -2,10 +2,7 @@
   "compilerOptions": {
     "outDir": "./dist",
     "target": "es5",
-    "lib": [
-      "esnext"
-    ],
-    "module": "esnext",
+    "module": "commonjs",
     "resolveJsonModule": true,
     "forceConsistentCasingInFileNames": true,
     "esModuleInterop": true,
