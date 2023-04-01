@@ -27,6 +27,7 @@
     "packages/*"
   ],
   "scripts": {
+    "add:shared": "npm install -w aicmd-shared",
     "add:web": "npm install -w aicmd-web",
     "dev:web": "npm run dev:web --workspaces --if-present",
     "build:web": "npm run build:web --workspaces --if-present",

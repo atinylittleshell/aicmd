@@ -52,9 +52,11 @@
     "typescript": "^5.0.2"
   },
   "dependencies": {
+    "aicmd-shared": "1.0.0",
     "appdirsjs": "^1.2.7",
     "axios": "^1.3.4",
     "chalk": "^4.1.2",
-    "commander": "^10.0.0"
+    "commander": "^10.0.0",
+    "open": "^9.1.0"
   }
 }

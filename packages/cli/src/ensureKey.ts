@@ -1,31 +1,33 @@
 import appDirs from 'appdirsjs';
 import fs from 'fs';
+import open from 'open';
 import path from 'path';
 
 import { readStdinAsync } from './utils';
 
 export const ensureKeyAsync = async () => {
-  if (process.env.OPENAI_API_KEY) {
+  if (process.env.AICMD_ACCESS_TOKEN) {
     return;
   }
 
   const dirs = appDirs({ appName: 'aicmd' });
 
   // if key file exists then read the key from it
-  const keyFile = path.join(dirs.config, 'key.txt');
+  const keyFile = path.join(dirs.config, 'aicmd_access_token.txt');
   if (fs.existsSync(keyFile)) {
-    process.env.OPENAI_API_KEY = fs.readFileSync(keyFile, 'utf-8').trim();
+    process.env.AICMD_ACCESS_TOKEN = fs.readFileSync(keyFile, 'utf-8').trim();
   }
-  if (process.env.OPENAI_API_KEY) {
+  if (process.env.AICMD_ACCESS_TOKEN) {
     return;
   }
 
   // otherwise, read from stdin
-  process.env.OPENAI_API_KEY = await readStdinAsync(
-    'Get your OpenAI API key from https://platform.openai.com/account/api-keys and enter your OpenAI API key here: ',
+  open('https://aicmd.app/get_key');
+  process.env.AICMD_ACCESS_TOKEN = await readStdinAsync(
+    'Get your access token from https://aicmd.app/get_key and enter it here: ',
   );
-  if (!process.env.OPENAI_API_KEY) {
-    console.error('You must provide a valid OpenAI API key in order to use aicmd.');
+  if (!process.env.AICMD_ACCESS_TOKEN) {
+    console.error('You must provide a valid access token in order to use aicmd.');
     process.exit(1);
   }
 
@@ -33,5 +35,5 @@ export const ensureKeyAsync = async () => {
   fs.mkdirSync(dirs.config, {
     recursive: true,
   });
-  fs.writeFileSync(keyFile, process.env.OPENAI_API_KEY, 'utf-8');
+  fs.writeFileSync(keyFile, process.env.AICMD_ACCESS_TOKEN, 'utf-8');
 };

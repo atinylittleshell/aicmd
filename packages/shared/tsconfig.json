@@ -1,13 +1,13 @@
 {
   "compilerOptions": {
-    "outDir": "./dist",
     "target": "es5",
     "lib": [
       "esnext"
     ],
+    "composite": true,
     "module": "esnext",
-    "resolveJsonModule": true,
     "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
     "esModuleInterop": true,
     "moduleResolution": "node",
     "isolatedModules": true,
@@ -19,12 +19,6 @@
     "src/**/*"
   ],
   "exclude": [
-    "node_modules",
-    "dist"
-  ],
-  "references": [
-    {
-      "path": "../shared"
-    }
+    "node_modules"
   ]
 }
