@@ -33,5 +33,7 @@ jobs:
         run: npm ci
       - name: run build
         run: npm run build
+        env:
+          FIREBASE_CREDENTIALS_BASE64: ${{ secrets.FIREBASE_CREDENTIALS_BASE64 }}
       - name: run lint
         run: npm run lint
