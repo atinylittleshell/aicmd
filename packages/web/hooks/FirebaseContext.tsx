@@ -6,7 +6,7 @@ import React, { useContext, useEffect, useState } from 'react';
 // all the IDs and keys here are okay to be exposed to public
 const firebaseConfig = {
   apiKey: 'AIzaSyCCkGwgj9ClfbUuBI3Hygdg5npdGyBWMfw',
-  authDomain: 'aicmd-a1065.firebaseapp.com',
+  authDomain: 'aicmd.app',
   projectId: 'aicmd-a1065',
   storageBucket: 'aicmd-a1065.appspot.com',
   messagingSenderId: '758692303030',

@@ -55,12 +55,15 @@ const Page = () => {
     return (
       <div className="flex-1 flex flex-col justify-center">
         <div className="hero">
-          <div className="hero-content text-center">
-            <div className="max-w-md">
-              <h1 className="text-5xl font-bold">Log in</h1>
-              <p className="py-6">Get your access token to use aicmd.app.</p>
+          <div className="hero-content">
+            <div className="max-w-md prose">
+              <h1 className="text-center">Get Started</h1>
+              <ul>
+                <li>Sign in required to prevent abuse.</li>
+                <li>Usage is free. No subscription or credits.</li>
+              </ul>
               <button
-                className="btn"
+                className="btn btn-primary btn-block mt-4"
                 onClick={() => {
                   firebaseContext.signInWithGoogle();
                 }}
