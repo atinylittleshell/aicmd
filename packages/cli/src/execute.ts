@@ -1,10 +1,10 @@
 /* eslint-disable no-console */
-import { GetCommandRequest, GetCommandResponse } from 'aicmd-shared/src/types';
 import axios from 'axios';
 import chalk from 'chalk';
 import { spawnSync } from 'child_process';
 import os from 'os';
 
+import { GetCommandRequest, GetCommandResponse } from './types';
 import { getCurrentShellAsync, readStdinAsync } from './utils';
 
 export const executeAsync = async (prompt: string, debug: boolean) => {

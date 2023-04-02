@@ -2,7 +2,7 @@ import appDirs from 'appdirsjs';
 import fs from 'fs';
 import path from 'path';
 
-import { readStdinAsync } from './utils';
+import { printAsciiArtAsync, readStdinAsync } from './utils';
 
 export const ensureKeyAsync = async () => {
   if (process.env.AICMD_ACCESS_TOKEN) {
@@ -21,8 +21,10 @@ export const ensureKeyAsync = async () => {
   }
 
   // otherwise, read from stdin
+  await printAsciiArtAsync('aicmd');
+
   process.env.AICMD_ACCESS_TOKEN = await readStdinAsync(
-    'Get your access token from https://aicmd.app/get_key and enter it here: ',
+    'Get your access token from [https://aicmd.app/get_key] and paste it here: ',
   );
   if (!process.env.AICMD_ACCESS_TOKEN) {
     console.error('You must provide a valid access token in order to use aicmd.');
