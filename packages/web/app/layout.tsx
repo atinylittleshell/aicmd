@@ -3,7 +3,9 @@ import './globals.css';
 import { Source_Code_Pro } from 'next/font/google';
 import { Metadata } from 'next/types';
 
+import BuyMeACoffeeButton from '../components/BuyMeACoffeeButton';
 import ClientSideProviders from '../components/ClientSideProviders';
+import GithubButton from '../components/GithubButton';
 
 const codeFont = Source_Code_Pro({ subsets: ['latin'] });
 
@@ -17,10 +19,14 @@ export const metadata: Metadata = {
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" data-theme="night" className={codeFont.className}>
-      <body className="h-screen w-screen flex flex-col">
-        <div className="self-center text-4xl m-4">AICMD</div>
+      <body className="h-screen w-screen flex flex-col p-2">
+        <div className="flex justify-center text-4xl">aicmd</div>
         <div className="flex-1 flex flex-col">
           <ClientSideProviders>{children}</ClientSideProviders>
+        </div>
+        <div className="flex items-center justify-center gap-4 my-4">
+          <BuyMeACoffeeButton />
+          <GithubButton />
         </div>
       </body>
     </html>

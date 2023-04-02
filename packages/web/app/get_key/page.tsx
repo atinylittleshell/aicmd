@@ -60,7 +60,7 @@ const Page = () => {
               <h1 className="text-center">Get Started</h1>
               <ul>
                 <li>Sign in required to prevent abuse.</li>
-                <li>Usage is free. No subscription or credits.</li>
+                <li>Usage is free. No fees whatsoever.</li>
               </ul>
               <button
                 className="btn btn-primary btn-block mt-4"
