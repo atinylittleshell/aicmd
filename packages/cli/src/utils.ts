@@ -1,4 +1,6 @@
+import chalk from 'chalk';
 import { exec } from 'child_process';
+import figlet from 'figlet';
 import os from 'os';
 import readline from 'readline';
 
@@ -47,8 +49,14 @@ export const getProcessNameAsync = (pid: string): Promise<string | null> => {
         resolve(null);
       });
     } else {
-      // TODO: Implement for other OS
-      resolve(null);
+      exec('echo $0', (err, stdout) => {
+        if (err) {
+          resolve(null);
+          return;
+        }
+
+        resolve(stdout.trim() || null);
+      });
     }
   });
 };
@@ -70,7 +78,39 @@ export const getCurrentShellAsync = async (): Promise<ShellInfo | null> => {
         return { shell: 'pwsh.exe', displayName: 'PowerShell Core' };
       }
     }
+  } else {
+    const parentProcessName = await getProcessNameAsync(process.ppid.toString());
+    if (parentProcessName?.endsWith('/sh') || parentProcessName?.endsWith('/bash')) {
+      return { shell: parentProcessName, displayName: 'Bash' };
+    } else if (parentProcessName?.endsWith('/tcsh')) {
+      return { shell: parentProcessName, displayName: 'Tcsh' };
+    } else if (parentProcessName?.endsWith('/ksh')) {
+      return { shell: parentProcessName, displayName: 'Ksh' };
+    } else if (parentProcessName?.endsWith('/zsh')) {
+      return { shell: parentProcessName, displayName: 'Zsh' };
+    } else if (parentProcessName?.endsWith('/fish')) {
+      return { shell: parentProcessName, displayName: 'Fish Shell' };
+    } else if (parentProcessName?.endsWith('/pwsh')) {
+      return { shell: parentProcessName, displayName: 'PowerShell Core' };
+    }
   }
 
   return null;
+};
+
+export const printAsciiArtAsync = (text: string): Promise<void> => {
+  return new Promise((resolve, reject) => {
+    figlet(text, (err, data) => {
+      if (err) {
+        reject(err);
+        return;
+      }
+
+      if (data) {
+        // eslint-disable-next-line no-console
+        console.log(chalk.yellow(data));
+        resolve();
+      }
+    });
+  });
 };
