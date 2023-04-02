@@ -7,7 +7,8 @@ import { getUserAsync } from '../../utils/serverUtils';
 export default async function api(
   request: NextApiRequest,
   response: NextApiResponse<{
-    command: string;
+    command?: string;
+    error?: string;
   }>,
 ) {
   // only allow POST requests
@@ -33,6 +34,11 @@ export default async function api(
     return;
   }
 
-  const result = await getCommandAsync(requestBody.prompt, requestBody.context);
-  response.status(200).json(result);
+  try {
+    const result = await getCommandAsync(requestBody.prompt, requestBody.context);
+    response.status(200).json(result);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (e: any) {
+    response.status(500).json({ error: e.message });
+  }
 }
