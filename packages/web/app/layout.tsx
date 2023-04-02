@@ -1,5 +1,6 @@
 import './globals.css';
 
+import { Analytics } from '@vercel/analytics/react';
 import { Source_Code_Pro } from 'next/font/google';
 import { Metadata } from 'next/types';
 
@@ -28,6 +29,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <BuyMeACoffeeButton />
           <GithubButton />
         </div>
+        <Analytics />
       </body>
     </html>
   );
