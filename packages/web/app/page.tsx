@@ -9,13 +9,13 @@ export default function Page() {
           <code>npm i -g aicmd</code>
         </pre>
         <pre data-prefix=">">
-          <code>aicmd print hello world</code>
+          <code>aicmd undo the last two git commits</code>
         </pre>
-        <pre data-prefix=">">
-          <code>aicmd find all jpg files in the current directory</code>
+        <pre data-prefix=">" className="text-info">
+          <code>git reset --soft HEAD~2</code>
         </pre>
-        <pre data-prefix=">">
-          <code>aicmd revert last git commit</code>
+        <pre data-prefix=">" className="text-warning">
+          <code>Execute the command above? [y/N]</code>
         </pre>
       </div>
       <div className="prose">
@@ -27,15 +27,9 @@ export default function Page() {
             </a>
             . Version 16+ required.
           </li>
+          <li>Always asks for confirmation before executing.</li>
           <li>Support all major OS and shells.</li>
           <li>Usage is free. No fees whatsoever.</li>
-          <li>
-            Open source on{' '}
-            <a href="https://github.com/kunchenguid/aicmd" target="_blank">
-              github
-            </a>
-            . Pull requests welcome.
-          </li>
         </ul>
       </div>
     </div>

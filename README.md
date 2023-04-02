@@ -2,9 +2,9 @@
 [![build](https://github.com/kunchenguid/aicmd/actions/workflows/build.yml/badge.svg)](https://github.com/kunchenguid/aicmd/actions/workflows/build.yml)
 
 A CLI program that allows you to write shell commands using nautral language.
+* Always asks for confirmation before executing.
 * Supports all major OS and shells.
 * Usage is free. No fees whatsoever.
-* Open source. Pull requests welcome.
 
 ![screenshot](./doc/screenshot.png)
 
