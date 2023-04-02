@@ -5,6 +5,7 @@ A CLI program that allows you to write shell commands using nautral language.
 * Supports all major OS and shells.
 * Usage is free. No fees whatsoever.
 * Open source. Pull requests welcome.
+
 ![screenshot](./doc/screenshot.png)
 
 ## Prerequisites
