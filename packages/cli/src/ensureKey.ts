@@ -9,7 +9,7 @@ export const ensureKeyAsync = async () => {
     return;
   }
 
-  const dirs = appDirs({ appName: 'aicmd' });
+  const dirs = appDirs.default({ appName: 'aicmd' });
 
   // if key file exists then read the key from it
   const keyFile = path.join(dirs.config, 'aicmd_access_token.txt');
