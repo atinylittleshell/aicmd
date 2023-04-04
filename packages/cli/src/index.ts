@@ -1,16 +1,17 @@
 #!/usr/bin/env node
 
 import { Command } from 'commander';
-import updateNofier from 'update-notifier';
 import { readFileSync } from 'fs';
 import path from 'path';
+import updateNofier from 'update-notifier';
+import { fileURLToPath } from 'url';
 
 import { ensureKeyAsync } from './ensureKey.js';
 import { executeAsync } from './execute.js';
-import { fileURLToPath } from 'url';
 
 const packageJson = JSON.parse(
-  readFileSync(path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../package.json'), 'utf-8'));
+  readFileSync(path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../package.json'), 'utf-8'),
+);
 
 const program = new Command();
 
