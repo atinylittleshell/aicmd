@@ -2,7 +2,7 @@ import appDirs from 'appdirsjs';
 import fs from 'fs';
 import path from 'path';
 
-import { printAsciiArtAsync, readStdinAsync } from './utils';
+import { printAsciiArtAsync, readStdinAsync } from './utils.js';
 
 export const ensureKeyAsync = async () => {
   if (process.env.AICMD_ACCESS_TOKEN) {

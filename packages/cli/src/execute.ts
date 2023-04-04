@@ -4,8 +4,8 @@ import chalk from 'chalk';
 import { spawnSync } from 'child_process';
 import os from 'os';
 
-import { GetCommandRequest, GetCommandResponse } from './types';
-import { getCurrentShellAsync, readStdinAsync } from './utils';
+import { GetCommandRequest, GetCommandResponse } from './types.js';
+import { getCurrentShellAsync, readStdinAsync } from './utils.js';
 
 export const executeAsync = async (prompt: string, debug: boolean) => {
   const osPlatform = os.platform();

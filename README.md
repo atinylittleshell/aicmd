@@ -40,9 +40,9 @@ Execute the command above? [y/N]
   on your computer. The source code of this backend service is also fully available in this repo.
 * Behind the scenes, we call [OpenAI's API](https://platform.openai.com/docs) to generate the commands. Please see
   [OpenAI's data usage policies](https://openai.com/policies/api-data-usage-policies) for how OpenAI handles the data.
-* Same as most AI-based tools, please be aware that AI can make mistakes and in this case it can give you commands that
-  don't do what you expect. Please make sure you understand and have confidence in the commands being suggested before 
-  executing them. You are responsible for the consequence of executing the commands.
+* You are responsible for the consequence of executing the commands. Same as most AI-based tools, please be aware that 
+  AI can make mistakes and in this case it can give you commands that don't do what you expect. Please make sure you 
+  understand and have confidence in the commands being suggested before executing them.
 
 ## Support me
 [Buy me a coffee](https://www.buymeacoffee.com/kunchenxyz)

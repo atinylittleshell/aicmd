@@ -1,10 +1,16 @@
 #!/usr/bin/env node
 
 import { Command } from 'commander';
+import updateNofier from 'update-notifier';
+import { readFileSync } from 'fs';
+import path from 'path';
 
-import packageJson from '../package.json';
-import { ensureKeyAsync } from './ensureKey';
-import { executeAsync } from './execute';
+import { ensureKeyAsync } from './ensureKey.js';
+import { executeAsync } from './execute.js';
+import { fileURLToPath } from 'url';
+
+const packageJson = JSON.parse(
+  readFileSync(path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../package.json'), 'utf-8'));
 
 const program = new Command();
 
@@ -13,6 +19,11 @@ program
   .option('-d --debug', 'output extra debugging information', false)
   .argument('<prompts...>', 'Ask what you want')
   .action(async (prompts: string[], options: Record<string, string | boolean>) => {
+    updateNofier({
+      pkg: packageJson,
+      updateCheckInterval: 1000 * 60 * 60, // 1 hour cooldown
+    }).notify();
+
     await ensureKeyAsync();
 
     const debug = options.debug ? true : false;
