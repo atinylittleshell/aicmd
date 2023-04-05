@@ -1,5 +1,6 @@
 import { CommandContext } from 'aicmd-shared/src/types';
 import { NextApiRequest, NextApiResponse } from 'next/types';
+import Statsig from 'statsig-node';
 
 import { getCommandAsync } from '../../utils/openai';
 import { getUserAsync } from '../../utils/serverUtils';
@@ -34,8 +35,28 @@ export default async function api(
     return;
   }
 
+  await Statsig.initialize(process.env.STATSIG_API_KEY ?? '', {
+    environment: {
+      tier: process.env.NODE_ENV === 'development' ? 'development' : 'production',
+    },
+  });
+
   try {
     const result = await getCommandAsync(requestBody.prompt, requestBody.context);
+
+    Statsig.logEvent(
+      {
+        userID: user.id,
+        email: user.email,
+      },
+      'get_command',
+      undefined,
+      {
+        prompt: requestBody.prompt,
+        command: result.command,
+      },
+    );
+
     response.status(200).json(result);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (e: any) {
