@@ -45,4 +45,4 @@ Execute the command above? [y/N]
   understand and have confidence in the commands being suggested before executing them.
 
 ## Support me
-[Buy me a coffee](https://www.buymeacoffee.com/kunchenxyz)
+[Buy me a coffee](https://www.buymeacoffee.com/onelittleshell)
