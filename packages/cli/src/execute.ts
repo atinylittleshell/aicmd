@@ -5,7 +5,7 @@ import chalk from 'chalk';
 import { spawnSync } from 'child_process';
 import os from 'os';
 
-import { getCurrentShellAsync, readStdinAsync } from './utils.js';
+import { getCurrentShellAsync, getGitInfoAsync, readStdinAsync } from './utils.js';
 
 export const executeAsync = async (prompt: string, debug: boolean) => {
   const osPlatform = os.platform();
@@ -14,6 +14,7 @@ export const executeAsync = async (prompt: string, debug: boolean) => {
     return;
   }
   const shellInfo = await getCurrentShellAsync();
+  const gitInfo = await getGitInfoAsync();
 
   const requestPayload: GetCommandRequest = {
     prompt,
@@ -22,6 +23,7 @@ export const executeAsync = async (prompt: string, debug: boolean) => {
         platform: osPlatform,
       },
       shellInfo,
+      gitInfo,
     },
   };
   if (debug) {

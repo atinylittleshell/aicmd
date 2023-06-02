@@ -11,6 +11,9 @@ export type CommandContext = {
     shell: string;
     displayName: string;
   } | null;
+  gitInfo: {
+    branch: string;
+  } | null;
 };
 
 export type GetCommandResponse = {

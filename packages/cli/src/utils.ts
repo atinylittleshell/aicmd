@@ -98,6 +98,19 @@ export const getCurrentShellAsync = async (): Promise<ShellInfo | null> => {
   return null;
 };
 
+export const getGitInfoAsync = (): Promise<{ branch: string } | null> => {
+  return new Promise((resolve) => {
+    exec('git rev-parse --abbrev-ref HEAD', (err, stdout) => {
+      if (err) {
+        resolve(null);
+        return;
+      }
+
+      resolve({ branch: stdout.trim() });
+    });
+  });
+};
+
 export const printAsciiArtAsync = (text: string): Promise<void> => {
   return new Promise((resolve, reject) => {
     figlet(text, (err, data) => {

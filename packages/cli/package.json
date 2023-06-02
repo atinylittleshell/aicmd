@@ -1,6 +1,6 @@
 {
   "name": "aicmd",
-  "version": "1.3.2",
+  "version": "1.4.0",
   "description": "A CLI program that allows you to write shell commands using nautral language.",
   "homepage": "https://aicmd.app",
   "author": "Kun Chen",

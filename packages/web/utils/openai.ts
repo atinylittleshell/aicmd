@@ -17,14 +17,18 @@ export const getCommandAsync = async (prompt: string, context: CommandContext): 
       {
         role: 'system',
         content:
+          'You are aicmd, a shell command assistant. You will be asked to help generate shell commands. ' +
           'You can only respond with a single-line shell command in a single code block. ' +
           'Do not write anything outside of the code block.',
       },
       {
         role: 'user',
-        content: `Write a ${
-          context.shellInfo ? context.shellInfo.displayName : 'shell'
-        } command that can complete the following task on ${OSPlatformMapping[context.osInfo.platform]}: ${prompt}`,
+        content: `# Context
+Operating system: ${OSPlatformMapping[context.osInfo.platform]}
+${context.shellInfo ? 'Shell: ' + context.shellInfo.displayName : ''}
+
+# Task
+Write a shell command that can complete the following task: ${prompt}`,
       },
     ],
     temperature: 0.2,
