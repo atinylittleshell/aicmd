@@ -7,10 +7,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kunchenguid/aicmd.git"
+    "url": "git+https://github.com/atinylittleshell/aicmd.git"
   },
   "bugs": {
-    "url": "https://github.com/kunchenguid/aicmd/issues"
+    "url": "https://github.com/atinylittleshell/aicmd/issues"
   },
   "keywords": [
     "ai",

@@ -1,5 +1,5 @@
 # AICMD
-[![build](https://github.com/kunchenguid/aicmd/actions/workflows/build.yml/badge.svg)](https://github.com/kunchenguid/aicmd/actions/workflows/build.yml)
+[![build](https://github.com/atinylittleshell/aicmd/actions/workflows/build.yml/badge.svg)](https://github.com/atinylittleshell/aicmd/actions/workflows/build.yml)
 
 A CLI program that allows you to write shell commands using nautral language.
 * Always asks for confirmation before executing.
