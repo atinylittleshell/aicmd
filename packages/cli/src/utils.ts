@@ -4,6 +4,12 @@ import figlet from 'figlet';
 import os from 'os';
 import readline from 'readline';
 
+export const OSPlatformMapping: Record<string, string> = {
+  darwin: 'macOS',
+  linux: 'Linux',
+  win32: 'Windows',
+};
+
 export const readStdinAsync = (question: string): Promise<string> => {
   return new Promise((resolve) => {
     const readlineInterface = readline.createInterface({

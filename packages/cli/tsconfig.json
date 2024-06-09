@@ -3,20 +3,16 @@
     "outDir": "./dist",
     "rootDir": "./src",
     "target": "es5",
-    "module": "esnext",
+    "module": "nodenext",
     "resolveJsonModule": true,
     "forceConsistentCasingInFileNames": true,
     "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "moduleResolution": "nodenext",
     "isolatedModules": true,
     "strict": true,
     "skipLibCheck": true
   },
-  "include": [
-    "src/**/*"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist"
-  ]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
 }

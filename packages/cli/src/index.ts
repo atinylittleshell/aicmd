@@ -6,7 +6,7 @@ import path from 'path';
 import updateNofier from 'update-notifier';
 import { fileURLToPath } from 'url';
 
-import { ensureKeyAsync } from './ensureKey.js';
+import { ensureModelAsync } from './ensureModel.js';
 import { executeAsync } from './execute.js';
 
 const packageJson = JSON.parse(
@@ -25,7 +25,7 @@ program
       updateCheckInterval: 1000 * 60 * 60, // 1 hour cooldown
     }).notify();
 
-    await ensureKeyAsync();
+    await ensureModelAsync();
 
     const debug = options.debug ? true : false;
     await executeAsync(prompts.join(' '), debug);

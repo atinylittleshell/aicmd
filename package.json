@@ -26,7 +26,6 @@
     "packages/*"
   ],
   "scripts": {
-    "add:shared": "npm install -w aicmd-shared",
     "add:cli": "npm install -w aicmd",
     "dev:cli": "npm run dev:cli --workspaces --if-present",
     "build:cli": "npm run build:cli --workspaces --if-present",

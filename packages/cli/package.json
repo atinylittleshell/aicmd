@@ -1,9 +1,9 @@
 {
   "name": "aicmd",
-  "version": "1.4.1",
+  "version": "2.0.0",
   "description": "A CLI program that allows you to write shell commands using nautral language.",
   "homepage": "https://aicmd.app",
-  "author": "Kun Chen",
+  "author": "atinylittleshell",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -66,12 +66,11 @@
     "typescript": "^5.0.2"
   },
   "dependencies": {
-    "aicmd-shared": "1.0.0",
     "appdirsjs": "^1.2.7",
-    "axios": "^1.3.4",
     "chalk": "^4.1.2",
     "commander": "^10.0.0",
     "figlet": "^1.5.2",
+    "ollama": "^0.5.1",
     "update-notifier": "^6.0.2"
   }
 }
