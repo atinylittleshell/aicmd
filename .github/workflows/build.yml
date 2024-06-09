@@ -16,9 +16,8 @@ jobs:
           - ubuntu
           - windows
         node-version:
-          - "16.x"
-          - "18.x"
-          - "19.x"
+          - '16.x'
+          - '22.x'
 
     name: build
     runs-on: ${{ matrix.os }}-latest
@@ -33,7 +32,5 @@ jobs:
         run: npm ci
       - name: run build
         run: npm run build
-        env:
-          FIREBASE_CREDENTIALS_BASE64: ${{ secrets.FIREBASE_CREDENTIALS_BASE64 }}
       - name: run lint
         run: npm run lint

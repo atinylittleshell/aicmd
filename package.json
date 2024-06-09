@@ -2,8 +2,7 @@
   "name": "aicmd-monorepo",
   "version": "1.0.0",
   "description": "A CLI program that allows you to run shell commands using nautral language.",
-  "homepage": "https://aicmd.app",
-  "author": "Kun Chen",
+  "author": "atinylittleshell",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -28,10 +27,6 @@
   ],
   "scripts": {
     "add:shared": "npm install -w aicmd-shared",
-    "add:web": "npm install -w aicmd-web",
-    "dev:web": "npm run dev:web --workspaces --if-present",
-    "build:web": "npm run build:web --workspaces --if-present",
-    "start:web": "npm run start:web --workspaces --if-present",
     "add:cli": "npm install -w aicmd",
     "dev:cli": "npm run dev:cli --workspaces --if-present",
     "build:cli": "npm run build:cli --workspaces --if-present",
